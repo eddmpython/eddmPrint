@@ -1,8 +1,8 @@
 # eddmPrint
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/eddmpython/eddmPrint)
-![PyPI](https://img.shields.io/pypi/v/eddmPrint)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/eddmpython/eddmPrint/Release)
+[![GitHub release](https://img.shields.io/github/v/release/eddmpython/eddmPrint?style=flat-square)](https://github.com/eddmpython/eddmPrint/releases)
+[![PyPI version](https://img.shields.io/pypi/v/eddmPrint?style=flat-square)](https://pypi.org/project/eddmPrint/)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/eddmpython/eddmPrint/release.yml?branch=main&style=flat-square&label=build)](https://github.com/eddmpython/eddmPrint/actions)
 
 개선된 print 함수로 파일명, 함수명, 라인 번호를 자동으로 표시합니다.
 
