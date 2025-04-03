@@ -16,21 +16,21 @@ class EddmPrint:
         if not self.isActive:
             builtins.print = self._wrappedPrint
             self.isActive = True
-        return self  # 메서드 체이닝 지원
+        return self  
 
     def restore(self):
         if self.isActive:
             builtins.print = self.originalPrint
             self.isActive = False
-        return self  # 메서드 체이닝 지원
+        return self 
 
     def setColor(self, colorCode):
         self.color = colorCode
-        return self  # 메서드 체이닝 지원
+        return self 
 
     def setPrefixTemplate(self, template):
         self.prefixTemplate = template
-        return self  # 메서드 체이닝 지원
+        return self  
 
     def _wrappedPrint(self, *args, **kwargs):
         frame = inspect.stack()[1]
