@@ -2,10 +2,9 @@ from setuptools import setup, find_packages
 
 setup(
     name="eddmPrint",
-    version="0.1.0",
-    packages=find_packages(where="src"),
-    package_dir={"": "src"},
-    install_requires=[],  # 특별한 의존성이 없음
+    version="0.1.2",
+    packages=find_packages(), 
+    install_requires=[],
     author="eddmpython",
     author_email="eddmpython@gmail.com",
     description="색상과 위치 정보가 포함된 개선된 프린트 라이브러리",
