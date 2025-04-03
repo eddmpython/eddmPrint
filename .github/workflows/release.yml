@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'  # v로 시작하는 태그가 푸시되면 실행됩니다. 예: v0.1.0
+      - 'v*'  
 
 jobs:
   release:
@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # 전체 기록을 가져와서 릴리스 노트 생성에 사용
+          fetch-depth: 0  
       
       - name: Set up Python
         uses: actions/setup-python@v4
