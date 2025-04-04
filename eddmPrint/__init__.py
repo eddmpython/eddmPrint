@@ -2,7 +2,7 @@ from .printer import EddmPrint
 from .colors import Colors
 from .templates import Templates
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 __all__ = ["EddmPrint", "Colors", "Templates", "print", "println", "error", "success", "warning", "info"]
 
 # 기본 인스턴스 생성 및 시작

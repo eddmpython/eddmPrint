@@ -1,5 +1,10 @@
 # 릴리스 노트
 
+## v0.1.4
+- EddmPrint 클래스에 print, println, error, success, warning, info 메서드 추가
+- 색상과 템플릿을 임시로 변경할 수 있는 기능 추가
+- 메서드 호출 시 원래 설정 자동 복원 기능 추가
+
 ## v0.1.3
 - 사용법 개선: 편의 함수들 직접 노출 (print, println, error, success, warning, info)
 - import 시 자동 초기화 기능 안정성 개선
