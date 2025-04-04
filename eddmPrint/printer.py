@@ -28,53 +28,43 @@ class EddmPrint:
         self.prefixTemplate = template
 
     def _get_caller_info(self):
-        """호출자의 파일, 함수, 라인 정보를 반환"""
         stack = inspect.stack()
-        # 라이브러리 내부 파일들을 건너뛰고 실제 호출 파일을 찾음
-        for frame in stack[2:]:  # [0]은 _get_caller_info, [1]은 _wrappedPrint
-            if not frame.filename.endswith('printer.py'):
+        for frame in stack:
+            filename = frame.filename
+            if not any(lib in filename for lib in ['eddmPrint', 'site-packages']):
                 return {
-                    'file': os.path.basename(frame.filename),
+                    'file': os.path.basename(filename),
                     'func': frame.function,
                     'line': frame.lineno
                 }
         return {'file': 'unknown', 'func': 'unknown', 'line': 0}
 
     def _wrappedPrint(self, *args, **kwargs):
-        # color와 template 파라미터 추출
         color = kwargs.pop('color', self.color)
         template = kwargs.pop('template', self.prefixTemplate)
-        
-        # 호출자 정보 가져오기
         caller = self._get_caller_info()
         prefix = f"{color}{template.format(**caller)}{self.reset}"
         self.originalPrint(prefix, *args, **kwargs)
 
     def print(self, *args, **kwargs):
-        """기본 프린트 함수"""
         self._wrappedPrint(*args, **kwargs)
 
     def println(self, *args, **kwargs):
-        """줄바꿈이 포함된 프린트 함수"""
         kwargs['end'] = '\n\n'
         self.print(*args, **kwargs)
 
     def error(self, *args, **kwargs):
-        """에러 메시지 출력"""
         kwargs['color'] = Colors.RED
         self.print(*args, **kwargs)
 
     def success(self, *args, **kwargs):
-        """성공 메시지 출력"""
         kwargs['color'] = Colors.GREEN
         self.print(*args, **kwargs)
 
     def warning(self, *args, **kwargs):
-        """경고 메시지 출력"""
         kwargs['color'] = Colors.YELLOW
         self.print(*args, **kwargs)
 
     def info(self, *args, **kwargs):
-        """정보 메시지 출력"""
         kwargs['color'] = Colors.CYAN
         self.print(*args, **kwargs)
