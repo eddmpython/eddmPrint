@@ -1,6 +1,6 @@
 # EddmPrint
 
-콘솔 출력에 색상과 메타데이터(파일명, 함수명, 라인번호)를 추가하는 Python 라이브러리입니다.
+콘솔 출력에 색상과 메타데이터(파일명, 함수명, 라인번호)를 자동으로 추가하는 Python 라이브러리입니다.
 
 ## 설치
 
@@ -10,46 +10,47 @@ pip install eddmPrint
 
 ## 사용법
 
-### 기본 사용법 (v0.1.3 이상)
+### 기본 사용법 (v0.1.4 이상)
 
-라이브러리를 임포트하면 자동으로 시작됩니다:
+라이브러리를 임포트하면 자동으로 시작되며, 기본 `print` 함수가 자동으로 확장됩니다:
 
 ```python
 import eddmPrint
 
-# 기본 프린트
-eddmPrint.print("테스트 메시지")  # 자동으로 파일명, 함수명, 라인 정보가 출력됨
+# 기본 print 함수가 자동으로 확장됩니다
+print("테스트 메시지")  # 자동으로 파일명, 함수명, 라인 정보가 출력됨
+```
 
-# 줄바꿈 포함
-eddmPrint.println("줄바꿈이 포함된 메시지")
+### 고급 사용법
+
+```python
+import eddmPrint
+
+# 기본 프린트 (print 함수가 자동으로 확장됨)
+print("기본 메시지")
 
 # 다양한 메시지 타입
 eddmPrint.error("에러 메시지")
 eddmPrint.success("성공 메시지")
 eddmPrint.warning("경고 메시지")
 eddmPrint.info("정보 메시지")
+
+# 줄바꿈이 포함된 메시지
+eddmPrint.println("줄바꿈이 포함된 메시지")
 ```
 
-### 색상 상수 사용
+### 색상과 템플릿 커스터마이징
 
 ```python
-from eddmPrint import Colors
+from eddmPrint import Colors, Templates
 
 # 색상 직접 설정
-eddmPrint.print("빨간색 메시지", color=Colors.RED)
-eddmPrint.print("초록색 메시지", color=Colors.GREEN)
-eddmPrint.print("파란색 메시지", color=Colors.BLUE)
-```
-
-### 템플릿 형식 변경
-
-```python
-from eddmPrint import Templates
+print("빨간색 메시지", color=Colors.RED)
+print("초록색 메시지", color=Colors.GREEN)
 
 # 템플릿 설정
-eddmPrint.print("간단한 템플릿", template=Templates.SIMPLE)
-eddmPrint.print("상세한 템플릿", template=Templates.DETAILED)
-eddmPrint.print("함수명만 표시", template=Templates.FUNCTION_ONLY)
+print("간단한 템플릿", template=Templates.SIMPLE)
+print("상세한 템플릿", template=Templates.DETAILED)
 ```
 
 ### 커스텀 프린터 사용
