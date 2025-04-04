@@ -8,7 +8,7 @@ with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name="eddmPrint",
-    version="0.1.4",
+    version="0.1.5",
     packages=find_packages(), 
     install_requires=[],
     author="eddmpython",

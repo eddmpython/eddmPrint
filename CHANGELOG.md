@@ -1,5 +1,10 @@
 # 릴리스 노트
 
+## v0.1.5
+- print 함수의 color와 template 파라미터 처리 방식 개선
+- 불필요한 상태 변경 코드 제거로 성능 향상
+- 기본 print 함수에서 직접 color와 template 설정 가능
+
 ## v0.1.4
 - EddmPrint 클래스에 print, println, error, success, warning, info 메서드 추가
 - 색상과 템플릿을 임시로 변경할 수 있는 기능 추가

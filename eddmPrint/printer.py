@@ -28,26 +28,20 @@ class EddmPrint:
         self.prefixTemplate = template
 
     def _wrappedPrint(self, *args, **kwargs):
+        # color와 template 파라미터 추출
+        color = kwargs.pop('color', self.color)
+        template = kwargs.pop('template', self.prefixTemplate)
+        
         frame = inspect.stack()[1]
         file = os.path.basename(frame.filename)
         func = frame.function
         line = frame.lineno
-        prefix = f"{self.color}{self.prefixTemplate.format(file=file, func=func, line=line)}{self.reset}"
+        prefix = f"{color}{template.format(file=file, func=func, line=line)}{self.reset}"
         self.originalPrint(prefix, *args, **kwargs)
 
     def print(self, *args, **kwargs):
         """기본 프린트 함수"""
-        color = kwargs.pop('color', self.color)
-        template = kwargs.pop('template', self.prefixTemplate)
-        original_color = self.color
-        original_template = self.prefixTemplate
-        
-        self.color = color
-        self.prefixTemplate = template
         self._wrappedPrint(*args, **kwargs)
-        
-        self.color = original_color
-        self.prefixTemplate = original_template
 
     def println(self, *args, **kwargs):
         """줄바꿈이 포함된 프린트 함수"""
