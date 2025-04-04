@@ -27,16 +27,27 @@ class EddmPrint:
     def setPrefixTemplate(self, template):
         self.prefixTemplate = template
 
+    def _get_caller_info(self):
+        """호출자의 파일, 함수, 라인 정보를 반환"""
+        stack = inspect.stack()
+        # 라이브러리 내부 파일들을 건너뛰고 실제 호출 파일을 찾음
+        for frame in stack[2:]:  # [0]은 _get_caller_info, [1]은 _wrappedPrint
+            if not frame.filename.endswith('printer.py'):
+                return {
+                    'file': os.path.basename(frame.filename),
+                    'func': frame.function,
+                    'line': frame.lineno
+                }
+        return {'file': 'unknown', 'func': 'unknown', 'line': 0}
+
     def _wrappedPrint(self, *args, **kwargs):
         # color와 template 파라미터 추출
         color = kwargs.pop('color', self.color)
         template = kwargs.pop('template', self.prefixTemplate)
         
-        frame = inspect.stack()[1]
-        file = os.path.basename(frame.filename)
-        func = frame.function
-        line = frame.lineno
-        prefix = f"{color}{template.format(file=file, func=func, line=line)}{self.reset}"
+        # 호출자 정보 가져오기
+        caller = self._get_caller_info()
+        prefix = f"{color}{template.format(**caller)}{self.reset}"
         self.originalPrint(prefix, *args, **kwargs)
 
     def print(self, *args, **kwargs):
