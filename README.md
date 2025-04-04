@@ -10,63 +10,57 @@ pip install eddmPrint
 
 ## 사용법
 
-### 기본 사용법 (v0.1.2 이상)
+### 기본 사용법 (v0.1.3 이상)
 
 라이브러리를 임포트하면 자동으로 시작됩니다:
 
 ```python
-from eddmPrint import printer
+import eddmPrint
 
-# 이미 시작되어 있어 바로 사용 가능
-print("테스트 메시지")  # 자동으로 파일명, 함수명, 라인 정보가 출력됨
+# 기본 프린트
+eddmPrint.print("테스트 메시지")  # 자동으로 파일명, 함수명, 라인 정보가 출력됨
 
-# 색상 변경
-printer.setColor("\033[31m")  # 빨간색으로 변경
-print("경고 메시지")
+# 줄바꿈 포함
+eddmPrint.println("줄바꿈이 포함된 메시지")
 
-# 원래 출력으로 복원
-printer.restore()
+# 다양한 메시지 타입
+eddmPrint.error("에러 메시지")
+eddmPrint.success("성공 메시지")
+eddmPrint.warning("경고 메시지")
+eddmPrint.info("정보 메시지")
 ```
 
 ### 색상 상수 사용
 
 ```python
-from eddmPrint import printer, Colors
+from eddmPrint import Colors
 
-printer.setColor(Colors.RED)
-print("빨간색 메시지")
-
-printer.setColor(Colors.GREEN)
-print("초록색 메시지")
-
-printer.setColor(Colors.BLUE)
-print("파란색 메시지")
+# 색상 직접 설정
+eddmPrint.print("빨간색 메시지", color=Colors.RED)
+eddmPrint.print("초록색 메시지", color=Colors.GREEN)
+eddmPrint.print("파란색 메시지", color=Colors.BLUE)
 ```
 
 ### 템플릿 형식 변경
 
 ```python
-from eddmPrint import printer, Templates
+from eddmPrint import Templates
 
-printer.setPrefixTemplate(Templates.SIMPLE)
-print("간단한 템플릿 [파일:라인]")
-
-printer.setPrefixTemplate(Templates.DETAILED)
-print("상세한 템플릿")
-
-printer.setPrefixTemplate(Templates.FUNCTION_ONLY)
-print("함수명만 표시")
+# 템플릿 설정
+eddmPrint.print("간단한 템플릿", template=Templates.SIMPLE)
+eddmPrint.print("상세한 템플릿", template=Templates.DETAILED)
+eddmPrint.print("함수명만 표시", template=Templates.FUNCTION_ONLY)
 ```
 
-### 수동 인스턴스 생성 (레거시)
+### 커스텀 프린터 사용
 
 ```python
 from eddmPrint import EddmPrint
 
-custom_printer = EddmPrint(color="\033[36m", prefixTemplate="[DEBUG {file}:{line}]")
-custom_printer.start()
-print("커스텀 프린터 테스트")
-custom_printer.restore()
+# 새로운 인스턴스 생성
+my_printer = EddmPrint(color="\033[36m", prefixTemplate="[DEBUG {file}:{line}]")
+my_printer.start()
+my_printer.print("커스텀 프린터 테스트")
 ```
 
 ## 색상 목록
